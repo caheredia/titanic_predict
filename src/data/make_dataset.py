@@ -3,6 +3,8 @@ import os
 import pandas as pd
 import numpy as np
 import logging
+import sys
+from ..features.build_features import add_extra_features
 
 
 def main():
@@ -10,15 +12,10 @@ def main():
         cleaned data ready to be analyzed (saved in ../processed).
     """
     logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
-
-    TITANIC_PATH = os.path.join("data", "raw")
-
-    def load_data(filename, titanic_path=TITANIC_PATH):
-        csv_path = os.path.join(titanic_path, filename)
-        return pd.read_csv(csv_path)
+    logger.info('Making final data set from raw data')
 
     train_data = load_data("train.csv")
+    logger.debug('Loaded csv file to pandas dataframe.')
 
     print(train_data.head())
 
