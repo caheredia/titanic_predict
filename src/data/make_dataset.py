@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import os 
-import pandas as pd 
-import numpy as np 
+import os
+import pandas as pd
+import numpy as np
 import logging
 
 
-def main(input_filepath, output_filepath):
+def main():
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
@@ -21,11 +21,11 @@ def main(input_filepath, output_filepath):
     train_data = load_data("train.csv")
 
     print(train_data.head())
-  
 
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.DEBUG, format=log_fmt)
+    logging.basicConfig(filename=os.path.abspath(
+        'data.Log'), level=logging.DEBUG, format=log_fmt, filemode='w')
 
     main()
