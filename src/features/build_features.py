@@ -4,12 +4,11 @@ import pandas as pd
 import numpy as np
 import logging
 
-
+# for debugging 
 logger = logging.getLogger(__name__)
 logger.info('Setting up relative path')
 
 TITANIC_PATH = os.path.join("data", "raw")
-
 
 def load_data(filename, titanic_path=TITANIC_PATH):
     """Loads data into pandas csv.
