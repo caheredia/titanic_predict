@@ -20,7 +20,7 @@ def load_data(filename, titanic_path=TITANIC_PATH):
     return pd.read_csv(csv_path)
 
 
-def add_num_features(df, column_names, relatives=True):
+def add_rel_features(df, column_names, relatives=True):
     '''Adds extra features to data sets.
 
     If boolean is true adds relatives on board.
@@ -34,10 +34,37 @@ def add_num_features(df, column_names, relatives=True):
 
     Returns
     -------
-    df : numpy.Array
+    df : pandas.core.frame.DataFrame
         transformed df .
     '''
     logger.debug('Adding RelativesOnboard column')
     if relatives:
         df['RelativeOnboard'] = df[column_names].sum(axis=1)
+        return df
+
+
+def add_AgeBucket_feature(df, column_name='Age', bin_size=15, add=True):
+    '''Adds extra feature to data.
+
+    If boolean is true adds age bucket.
+
+    Parameters
+    ----------
+    df : pandas.core.frame.DataFrame
+        dataframe to modify
+    column_name : string (optional)
+        columns containing relative data
+    bin_size = int (optional)
+        number of categories 
+    add: boolean (optional)
+        trigger for feature 
+
+    Returns
+    -------
+    df : pandas.core.frame.DataFrame
+        transformed df .
+    '''
+    logger.debug('Adding Age column')
+    if add:
+        df['AgeBucket'] = df[column_names] // bin_size * bin_size
         return df
