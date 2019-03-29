@@ -25,6 +25,9 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+## Run pytest files 
+tests: 
+	pytest
 ## Make Dataset
 data: 
 	$(PYTHON_INTERPRETER) -m src.data.make_dataset
@@ -73,9 +76,6 @@ else
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 endif
 
-## Test python environment is setup correctly
-test_environment:
-	$(PYTHON_INTERPRETER) test_environment.py
 
 #################################################################################
 # PROJECT RULES                                                                 #
