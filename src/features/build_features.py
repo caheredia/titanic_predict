@@ -40,7 +40,7 @@ def add_rel_features(df, column_names, relatives=True):
     '''
     logger.debug('Adding RelativesOnboard column')
     if relatives:
-        df['RelativeOnboard'] = df[column_names].sum(axis=1)
+        df['RelativesOnboard'] = df[column_names].sum(axis=1)
         return df
 
 
@@ -72,12 +72,13 @@ def add_AgeBucket_feature(df, column_name='Age', bin_size=15, add=True):
 
 
 # Inspired from stackoverflow.com/questions/25239958
-# returns the most frequent item for each selected column 
-# fills any nulls with most frequent item 
+# returns the most frequent item for each selected column
+# fills any nulls with most frequent item
 class MostFrequentImputer(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         self.most_frequent_ = pd.Series([X[c].value_counts().index[0] for c in X],
                                         index=X.columns)
         return self
+
     def transform(self, X, y=None):
         return X.fillna(self.most_frequent_)
