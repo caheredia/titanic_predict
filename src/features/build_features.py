@@ -66,5 +66,5 @@ def add_AgeBucket_feature(df, column_name='Age', bin_size=15, add=True):
     '''
     logger.debug('Adding Age column')
     if add:
-        df['AgeBucket'] = df[column_names] // bin_size * bin_size
+        df['AgeBucket'] = df[column_name] // bin_size * bin_size
         return df
