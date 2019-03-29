@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 import logging
+from sklearn.base import BaseEstimator, TransformerMixin
 
 # for debugging
 logger = logging.getLogger(__name__)
@@ -68,3 +69,15 @@ def add_AgeBucket_feature(df, column_name='Age', bin_size=15, add=True):
     if add:
         df['AgeBucket'] = df[column_name] // bin_size * bin_size
         return df
+
+
+# Inspired from stackoverflow.com/questions/25239958
+# returns the most frequent item for each selected column 
+# fills any nulls with most frequent item 
+class MostFrequentImputer(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        self.most_frequent_ = pd.Series([X[c].value_counts().index[0] for c in X],
+                                        index=X.columns)
+        return self
+    def transform(self, X, y=None):
+        return X.fillna(self.most_frequent_)
