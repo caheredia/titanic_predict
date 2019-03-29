@@ -23,6 +23,6 @@ def main():
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(filename=os.path.abspath(
-        'data.Log'), level=logging.DEBUG, format=log_fmt, filemode='w')
+        'titanic.log'), level=logging.DEBUG, format=log_fmt, filemode='w')
 
     main()
