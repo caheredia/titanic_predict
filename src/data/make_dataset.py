@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import logging
 from src.features.build_features import load_data
+from src.features.build_features import num_pipeline
 
 
 def main():
