@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 import logging
-from src.features.build_features import load_data
+from src.features.build_features import load_data, set_title
 from src.features.build_features import add_rel_features
 from src.features.build_features import add_travel_alone
 from src.features.build_features import add_AgeBucket_feature
@@ -31,7 +31,9 @@ def main():
     def add_columns(df):
         df = add_rel_features(df, relatives)
         df = add_travel_alone(df)
-        df = add_AgeBucket_feature(df)
+        df['Age_Bucket'] = add_bucket(df['Age'], bins=6)
+        df['Fare_Bucket'] = add_bucket(df['Fare'], bins=6)
+        df['Title'] = df['Name'].apply(set_title)
         return df
     train_data = add_columns(train_data)
     test_data = add_columns(test_data)

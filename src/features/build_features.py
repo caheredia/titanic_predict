@@ -64,35 +64,58 @@ def add_rel_features(df, column_names, relatives=True):
 def add_travel_alone(df):
     """Adds traveling alone column to data."""
     logger.debug('Adding traveling_alone column')
-    df['traveling_alone'] = np.where(df['RelativesOnboard'] == 0, 1, 0)
+    df['traveling_alone'] = np.where(df['RelativesOnboard'] == 0, 0, 1)
     return df
 
 
-def add_AgeBucket_feature(df, column_name='Age', bin_size=15, add=True):
-    '''Adds extra feature to data.
-
-    If boolean is true adds age bucket.
+def add_bucket(df_column, bins=4):
+    """Adds binnned bucket column to data.
 
     Parameters
     ----------
-    df : pandas.core.frame.DataFrame
-        dataframe to modify
-    column_name : string (optional)
-        columns containing relative data
-    bin_size = int (optional)
+    df_column : pandas.core.frame.DataFrame
+        dataframe column containing data to bin
+    bins = int (optional)
         number of categories 
-    add: boolean (optional)
-        trigger for feature 
 
     Returns
     -------
-    df : pandas.core.frame.DataFrame
-        transformed df .
-    '''
-    logger.debug('Adding Age column')
-    if add:
-        df['AgeBucket'] = df[column_name] // bin_size * bin_size
-        return df
+    data : pandas.core.frame.DataFrame
+        transformed df with labels
+    """
+    logger.debug('Generating new bucket column')
+    data = pd.qcut(df_column, bins, labels=False)
+    return data
+
+def set_title(name):
+    """Returns the Title in the name string."""
+    titles = {
+        "Capt.": "Prestige",
+        "Col.": "Prestige",
+        "Major.": "Prestige",
+        "Jonkheer.": "Prestige",
+        "Don.": "Prestige",
+        "Dona.": "Prestige",
+        'Countess.':'Prestige',
+        "Sir.": "Prestige",
+        "Dr.": "Prestige",
+        "Rev.": "Prestige",
+        "the. Countess": "Prestige",
+        "Mme.": "Mrs",
+        "Mlle.": "Miss",
+        "Ms.": "Mrs",
+        "Mrs.": "Mrs",
+        "Mr.": "Mr",
+        "Miss.": "Miss",
+        "Master.": "Prestige",
+        "Lady.": "Prestige"
+    }
+    
+    for key in titles:
+        if key in name.split():
+            return titles[key]
+        
+
 
 
 # Inspired from stackoverflow.com/questions/25239958
