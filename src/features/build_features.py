@@ -14,13 +14,13 @@ logger.info('Setting up relative path')
 TITANIC_PATH = os.path.join("data", "raw")
 
 
-def load_data(filename, titanic_path=TITANIC_PATH):
+def load_data(filename, titanic_path=TITANIC_PATH, nrows=None):
     """Loads data into pandas csv.
 
      """
     csv_path = os.path.join(titanic_path, filename)
     logger.debug('Loading csv into pandas dataframe')
-    return pd.read_csv(csv_path)
+    return pd.read_csv(csv_path, nrows=nrows)
 
 
 def add_rel_features(df, column_names, relatives=True):

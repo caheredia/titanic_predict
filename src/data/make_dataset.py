@@ -19,11 +19,11 @@ def main():
 
     print(train_data.head())
 
-    # apply pipeline 
+    # apply pipeline
     logger.info('Applying pipeline')
-    X = num_pipeline.fit_transform(train_data['Age'].values.reshape(1,-1))
+    X = num_pipeline.fit_transform(train_data['Age'].values.reshape(1, -1))
     print(X.shape)
-
+    print(type(X))
 
 
 if __name__ == '__main__':
