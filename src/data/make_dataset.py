@@ -22,6 +22,7 @@ def main():
 
     # Load data
     train_data = load_data("train.csv")
+    test_data = load_data("test.csv")
 
     # add columns
     logger.info('Adding columns to training set')
@@ -33,6 +34,7 @@ def main():
         df = add_AgeBucket_feature(df)
         return df
     train_data = add_columns(train_data)
+    test_data = add_columns(test_data)
 
     # Full pipeline
     logger.info('Applying pipeline to training set')
@@ -46,6 +48,7 @@ def main():
     ])
 
     X_train = full_pipeline.fit_transform(train_data)
+    X_test = full_pipeline.transform(test_data)
 
     # Save the transformed data, test data, and pipeline parameters
     logger.info('Saving transformed data, test data, and pipeline parameters')
@@ -55,6 +58,8 @@ def main():
         PROCESSED_PATH, 'full_pipeline.pkl'))
     # X_train
     joblib.dump(X_train, os.path.join(PROCESSED_PATH, 'X_train.pkl'))
+    # X_test
+    joblib.dump(X_test, os.path.join(PROCESSED_PATH, 'X_test.pkl'))
 
 
 if __name__ == '__main__':
