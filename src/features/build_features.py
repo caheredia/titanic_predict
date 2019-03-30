@@ -6,6 +6,7 @@ import logging
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
 
 # for debugging
 logger = logging.getLogger(__name__)
@@ -60,6 +61,13 @@ def add_rel_features(df, column_names, relatives=True):
         return df
 
 
+def add_travel_alone(df):
+    """Adds traveling alone column to data."""
+    logger.debug('Adding RelativesOnboard column')
+    df['traveling_alone'] = np.where(df['RelativesOnboard'] == 0, 1, 0)
+    return df
+
+
 def add_AgeBucket_feature(df, column_name='Age', bin_size=15, add=True):
     '''Adds extra feature to data.
 
@@ -102,3 +110,9 @@ class MostFrequentImputer(BaseEstimator, TransformerMixin):
 
 # numerical pipeline
 num_pipeline = Pipeline([("imputer", SimpleImputer(strategy="median"))])
+
+# categorical pipeline
+cat_pipeline = Pipeline([
+    ("imputer", MostFrequentImputer()),
+    ("cat_encoder", OneHotEncoder(sparse=False)),
+])

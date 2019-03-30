@@ -4,7 +4,12 @@ import pandas as pd
 import numpy as np
 import logging
 from src.features.build_features import load_data
+from src.features.build_features import add_rel_features
+from src.features.build_features import add_travel_alone
+from src.features.build_features import add_AgeBucket_feature
 from src.features.build_features import num_pipeline
+from src.features.build_features import cat_pipeline
+from sklearn.compose import ColumnTransformer
 
 
 def main():
@@ -14,16 +19,33 @@ def main():
     logger = logging.getLogger(__name__)
     logger.info('Making final data set from raw data')
 
+    # Load data
     train_data = load_data("train.csv")
-    logger.debug('Loaded csv file to pandas dataframe.')
 
-    print(train_data.head())
+    # add columns
+    relatives = ['SibSp', 'Parch']
 
-    # apply pipeline
+    def add_columns(df):
+        df = add_rel_features(df, relatives)
+        df = add_travel_alone(df)
+        df = add_AgeBucket_feature(df)
+        return df
+    train_data = add_columns(train_data)
+
+    # Full pipeline
     logger.info('Applying pipeline')
-    X = num_pipeline.fit_transform(train_data['Age'].values.reshape(1, -1))
-    print(X.shape)
-    print(type(X))
+    cat_attribs = ["Pclass", "Sex", 'Embarked',
+                   'traveling_alone',  'AgeBucket']
+    num_attribs = ["RelativesOnboard", "Fare"]
+
+    full_pipeline = ColumnTransformer([
+        ("num", num_pipeline, num_attribs),
+        ("cat", cat_pipeline, cat_attribs),
+    ])
+
+    X_train = full_pipeline.fit_transform(train_data)
+
+    print(X_train.shape)
 
 
 if __name__ == '__main__':
