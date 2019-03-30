@@ -84,6 +84,7 @@ class MostFrequentImputer(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         return X.fillna(self.most_frequent_)
-        
+
+
 # numerical pipeline
-num_pipeline = Pipeline([ ("imputer", SimpleImputer(strategy="median")) ])
+num_pipeline = Pipeline([("imputer", SimpleImputer(strategy="median"))])

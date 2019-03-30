@@ -19,6 +19,12 @@ def main():
 
     print(train_data.head())
 
+    # apply pipeline 
+    logger.info('Applying pipeline')
+    X = num_pipeline.fit_transform(train_data['Age'].values.reshape(1,-1))
+    print(X.shape)
+
+
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
