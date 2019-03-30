@@ -13,6 +13,6 @@ def test_loader():
     assert type(test_data) == type(pd.DataFrame())
 
 
-def test_pipeline():
+def test_num_pipeline():
     X = num_pipeline.fit_transform(train_data['Age'].values.reshape(1, -1))
     assert type(X) == type(np.empty(1))

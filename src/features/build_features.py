@@ -17,6 +17,20 @@ TITANIC_PATH = os.path.join("data", "raw")
 def load_data(filename, titanic_path=TITANIC_PATH, nrows=None):
     """Loads data into pandas csv.
 
+    Parameters
+    ----------
+    filename : string
+        location of data file 
+    titanic_path = string (optional)
+        path to data files 
+    nrows = int (optional)
+        number of rows to load 
+
+    Returns
+    -------
+    df : pandas.core.frame.DataFrame
+        data
+
      """
     csv_path = os.path.join(titanic_path, filename)
     logger.debug('Loading csv into pandas dataframe')
