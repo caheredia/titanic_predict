@@ -23,6 +23,7 @@ def main():
     train_data = load_data("train.csv")
 
     # add columns
+    logger.info('Adding columns to training set')
     relatives = ['SibSp', 'Parch']
 
     def add_columns(df):
@@ -33,7 +34,7 @@ def main():
     train_data = add_columns(train_data)
 
     # Full pipeline
-    logger.info('Applying pipeline')
+    logger.info('Applying pipeline to training set')
     cat_attribs = ["Pclass", "Sex", 'Embarked',
                    'traveling_alone',  'AgeBucket']
     num_attribs = ["RelativesOnboard", "Fare"]

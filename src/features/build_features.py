@@ -63,7 +63,7 @@ def add_rel_features(df, column_names, relatives=True):
 
 def add_travel_alone(df):
     """Adds traveling alone column to data."""
-    logger.debug('Adding RelativesOnboard column')
+    logger.debug('Adding traveling_alone column')
     df['traveling_alone'] = np.where(df['RelativesOnboard'] == 0, 1, 0)
     return df
 
