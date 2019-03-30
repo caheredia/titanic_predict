@@ -30,15 +30,17 @@ def main():
         df['Age_Bucket'] = add_bucket(df['Age'], bins=6)
         df['Fare_Bucket'] = add_bucket(df['Fare'], bins=6)
         df['Title'] = df['Name'].apply(set_title)
+        df['Name_length'] = df['Name'].apply(len)
+        df['Cabin'] = df['Cabin'].apply(lambda x: 0 if type(x) == float else 1)
         return df
     train_data = add_columns(train_data)
     test_data = add_columns(test_data)
 
     # Full pipeline
     logger.info('Applying pipeline to data sets')
-    cat_attribs = ["Pclass", "Sex", 'Embarked',
-                   'traveling_alone',  'AgeBucket']
-    num_attribs = ["RelativesOnboard", "Fare"]
+    cat_attribs = ["Pclass", 'Embarked',  'Age_Bucket',
+                   'Fare_Bucket', 'Title', 'Sex', 'traveling_alone', 'Cabin']
+    num_attribs = ["RelativesOnboard", 'Fare', 'Age', 'Name_length']
 
     full_pipeline = ColumnTransformer([
         ("num", num_pipeline, num_attribs),
