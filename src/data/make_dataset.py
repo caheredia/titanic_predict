@@ -25,7 +25,7 @@ def main():
     test_data = load_data("test.csv")
 
     # add columns
-    logger.info('Adding columns to training set')
+    logger.info('Adding columns to data sets')
     relatives = ['SibSp', 'Parch']
 
     def add_columns(df):
@@ -37,7 +37,7 @@ def main():
     test_data = add_columns(test_data)
 
     # Full pipeline
-    logger.info('Applying pipeline to training set')
+    logger.info('Applying pipeline to data sets')
     cat_attribs = ["Pclass", "Sex", 'Embarked',
                    'traveling_alone',  'AgeBucket']
     num_attribs = ["RelativesOnboard", "Fare"]
@@ -51,7 +51,7 @@ def main():
     X_test = full_pipeline.transform(test_data)
 
     # Save the transformed data, test data, and pipeline parameters
-    logger.info('Saving transformed data, test data, and pipeline parameters')
+    logger.info('Saving transformed data sets and pipeline parameters')
     PROCESSED_PATH = os.path.join("data", "processed")
     # pipeline
     joblib.dump(full_pipeline, os.path.join(
