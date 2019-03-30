@@ -10,6 +10,7 @@ from src.features.build_features import add_AgeBucket_feature
 from src.features.build_features import num_pipeline
 from src.features.build_features import cat_pipeline
 from sklearn.compose import ColumnTransformer
+from sklearn.externals import joblib
 
 
 def main():
@@ -46,7 +47,14 @@ def main():
 
     X_train = full_pipeline.fit_transform(train_data)
 
-    print(X_train.shape)
+    # Save the transformed data, test data, and pipeline parameters
+    logger.info('Saving transformed data, test data, and pipeline parameters')
+    PROCESSED_PATH = os.path.join("data", "processed")
+    # pipeline
+    joblib.dump(full_pipeline, os.path.join(
+        PROCESSED_PATH, 'full_pipeline.pkl'))
+    # X_train
+    joblib.dump(X_train, os.path.join(PROCESSED_PATH, 'X_train.pkl'))
 
 
 if __name__ == '__main__':
