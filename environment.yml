@@ -146,5 +146,6 @@ dependencies:
     - pycodestyle==2.5.0
     - recommonmark==0.5.0
     - sphinx-rtd-theme==0.4.3
+    - xgboost==0.82
 prefix: /Users/cristian/miniconda3/envs/mlbook
 
