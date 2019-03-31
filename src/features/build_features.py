@@ -41,13 +41,6 @@ def load_data(filename, titanic_path=TITANIC_PATH, nrows=None):
 
 
 
-def add_travel_alone(df):
-    """Adds traveling alone column to data."""
-    logger.debug('Adding traveling_alone column')
-    df['traveling_alone'] = np.where(df['RelativesOnboard'] == 0, 0, 1)
-    return df
-
-
 def add_bucket(df_column, bins=4):
     """Adds binnned bucket column to data.
 

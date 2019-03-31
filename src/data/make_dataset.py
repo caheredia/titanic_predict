@@ -26,7 +26,6 @@ def main():
 
     def add_columns(df):
         df['RelativesOnboard'] = df[relatives].sum(axis=1)
-        df = add_travel_alone(df)
         df['Age_Bucket'] = add_bucket(df['Age'], bins=6)
         df['Fare_Bucket'] = add_bucket(df['Fare'], bins=6)
         df['Title'] = df['Name'].apply(set_title)
