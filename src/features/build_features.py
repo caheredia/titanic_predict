@@ -38,27 +38,7 @@ def load_data(filename, titanic_path=TITANIC_PATH, nrows=None):
     return pd.read_csv(csv_path, nrows=nrows)
 
 
-def add_rel_features(df, column_names, relatives=True):
-    '''Adds extra features to data sets.
 
-    If boolean is true adds relatives on board.
-
-    Parameters
-    ----------
-    df : pandas.core.frame.DataFrame
-        dataframe to modify
-    column_names : list
-        columns containing relative data
-
-    Returns
-    -------
-    df : pandas.core.frame.DataFrame
-        transformed df .
-    '''
-    logger.debug('Adding RelativesOnboard column')
-    if relatives:
-        df['RelativesOnboard'] = df[column_names].sum(axis=1)
-        return df
 
 
 def add_travel_alone(df):

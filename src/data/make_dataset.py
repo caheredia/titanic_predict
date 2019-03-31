@@ -25,7 +25,7 @@ def main():
     relatives = ['SibSp', 'Parch']
 
     def add_columns(df):
-        df = add_rel_features(df, relatives)
+        df['RelativesOnboard'] = df[relatives].sum(axis=1)
         df = add_travel_alone(df)
         df['Age_Bucket'] = add_bucket(df['Age'], bins=6)
         df['Fare_Bucket'] = add_bucket(df['Fare'], bins=6)
