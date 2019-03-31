@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 import logging
-from src.features.build_features import load_data, set_title, add_bucket, add_rel_features, add_travel_alone
+from src.features.build_features import load_data, set_title, add_bucket
 from src.features.build_features import num_pipeline, cat_pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.externals import joblib
