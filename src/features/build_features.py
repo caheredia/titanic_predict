@@ -38,9 +38,6 @@ def load_data(filename, titanic_path=TITANIC_PATH, nrows=None):
     return pd.read_csv(csv_path, nrows=nrows)
 
 
-
-
-
 def add_bucket(df_column, bins=4):
     """Adds binnned bucket column to data.
 
@@ -60,6 +57,7 @@ def add_bucket(df_column, bins=4):
     data = pd.qcut(df_column, bins, labels=False)
     return data
 
+
 def set_title(name):
     """Returns the Title in the name string."""
     titles = {
@@ -69,7 +67,7 @@ def set_title(name):
         "Jonkheer.": "Prestige",
         "Don.": "Prestige",
         "Dona.": "Prestige",
-        'Countess.':'Prestige',
+        'Countess.': 'Prestige',
         "Sir.": "Prestige",
         "Dr.": "Prestige",
         "Rev.": "Prestige",
@@ -83,12 +81,10 @@ def set_title(name):
         "Master.": "Prestige",
         "Lady.": "Prestige"
     }
-    
+
     for key in titles:
         if key in name.split():
             return titles[key]
-        
-
 
 
 # Inspired from stackoverflow.com/questions/25239958
