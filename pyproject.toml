@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "titanic"
+version = "0.1.0"
+description = ""
+authors = ["Cristian Heredia"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+matplotlib = "^3.1"
+pandas = "^0.24.2"
+jupyter = "^1.0"
+scikit-learn = "^0.21.1"
+pytest = "^4.5"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.4"
+flake8 = "^3.7"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
